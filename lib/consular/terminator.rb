@@ -5,5 +5,7 @@ module Consular
   #
   class Terminator
 
+    Consular.add_core self
+
   end
 end
