@@ -21,4 +21,10 @@ describe Consular::Terminator do
     Kernel.expects(:`).with('which xdotool').returns('which: command not found')
     Consular::Terminator.valid_system?.should == false
   end
+
+  it 'should treat systems without "xdotool" as invalid' do
+    RbConfig::CONFIG.expects(:[]).returns({ 'host_os' => 'x86-linux' })
+    Kernel.expects(:`).with('which xdotool').returns('')
+    Consular::Terminator.valid_system?.should == false
+  end
 end
