@@ -16,12 +16,13 @@ module Consular
         if (RbConfig::CONFIG['host_os'] =~ /linux/) != nil
           if !(xdotool = `which xdotool`.chomp).empty?
             begin
-              File::Stat.new(xdotool).executable?
+              return File::Stat.new(xdotool).executable?
             rescue
-              false
+              return false
             end
           end
         end
+        return false
       end
     end
   end
