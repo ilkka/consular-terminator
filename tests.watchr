@@ -90,13 +90,14 @@ def spec(specfiles)
              when false
                specfiles
              end
-  if run(%Q(rspec #{rspec_opts} #{specs}))
+  if run(%Q(rspec #{specs}))
     if @last_run_failed
       run_all_specs && @last_run_failed = false
     end
   else
     @last_run_failed = true
   end
+  !@last_run_failed
 end
 
 # Run a single feature.
@@ -109,21 +110,7 @@ def feature(featurefiles)
              when false
                featurefiles
              end
-  run(%Q(cucumber #{cucumber_opts} #{features}))
-end
-
-# Options for rspec run
-#
-# @return [String] string with options.
-def rspec_opts
-  "--format documentation --color --drb"
-end
-
-# Options for cucumber run.
-#
-# @return [String] string with options.
-def cucumber_opts
-  "--drb --port 8990"
+  run(%Q(cucumber #{features}))
 end
 
 # Run all specs.
