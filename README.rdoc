@@ -1,0 +1,13 @@
+= Terminator support for Consular
+
+This gem is an add-on to Consular that implements support for the Terminator
+terminal emulator on Linux.
+
+Since Terminator does not have an API for controlling it, a commandline tool
+called `xdotool` is used to send keyboard shortcuts to a running Terminator
+in order to control it.
+
+== Copyright
+
+Copyright (c) 2011 Ilkka Laukkanen. See LICENSE.txt for further details.
+
