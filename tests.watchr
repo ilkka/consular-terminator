@@ -84,7 +84,12 @@ end
 #
 # @param specfiles [String] path to specfile or [Array] of paths.
 def spec(specfiles)
-  specs = specfiles.respond_to? :join ? specfiles.join(" ") : specfiles
+  specs = case specfiles.respond_to? :join
+             when true
+               specfiles.join(" ")
+             when false
+               specfiles
+             end
   if run(%Q(rspec #{rspec_opts} #{specs}))
     if @last_run_failed
       run_all_specs && @last_run_failed = false
@@ -98,7 +103,12 @@ end
 #
 # @param featurefiles [String] path to feature file or [Array] of paths.
 def feature(featurefiles)
-  features = featurefiles.respond_to? :join ? featurefiles.join(" ") : featurefiles
+  features = case featurefiles.respond_to? :join
+             when true
+               featurefiles.join(" ")
+             when false
+               featurefiles
+             end
   run(%Q(cucumber #{cucumber_opts} #{features}))
 end
 
