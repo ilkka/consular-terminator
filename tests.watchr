@@ -82,9 +82,10 @@ end
 
 # Run a single spec.
 #
-# @param specfile [String] path to specfile.
-def spec(specfile)
-  if run(%Q(rspec #{rspec_opts} #{specfile}))
+# @param specfiles [String] path to specfile or [Array] of paths.
+def spec(specfiles)
+  specs = specfiles.respond_to? :join ? specfiles.join(" ") : specfiles
+  if run(%Q(rspec #{rspec_opts} #{specs}))
     if @last_run_failed
       run_all_specs && @last_run_failed = false
     end
@@ -95,9 +96,10 @@ end
 
 # Run a single feature.
 #
-# @param featurefile [String] path to feature file.
-def feature(featurefile)
-  run(%Q(cucumber #{cucumber_opts} #{featurefile}))
+# @param featurefiles [String] path to feature file or [Array] of paths.
+def feature(featurefiles)
+  features = featurefiles.respond_to? :join ? featurefiles.join(" ") : featurefiles
+  run(%Q(cucumber #{cucumber_opts} #{features}))
 end
 
 # Options for rspec run
@@ -117,19 +119,19 @@ end
 # Run all specs.
 #
 def run_all_specs
-  run "rake spec"
+  spec Dir['spec/*_spec.rb']
 end
 
 # Run all features.
 #
 def run_features
-  run "rake features"
+  feature Dir['features/*.feature']
 end
 
 # Run specs and features.
 #
 def run_suite
-  run "rake spec features"
+  run_all_specs && run_features
 end
 
 # Run all specs on Ctrl-\
