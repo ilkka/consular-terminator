@@ -15,4 +15,10 @@ describe Consular::Terminator do
     RbConfig::CONFIG.expects(:[]).with('host_os').returns('darwin')
     Consular::Terminator.valid_system?.should == false
   end
+
+  it 'should treat systems without "which" as invalid' do
+    RbConfig::CONFIG.expects(:[]).returns({ 'host_os' => 'x86-linux' })
+    Kernel.expects(:`).with('which xdotool').returns('which: command not found')
+    Consular::Terminator.valid_system?.should == false
+  end
 end
