@@ -92,7 +92,8 @@ def spec(specfiles)
              end
   if run(%Q(rspec #{specs}))
     if @last_run_failed
-      run_all_specs && @last_run_failed = false
+      @last_run_failed = false
+      run_all_specs
     end
   else
     @last_run_failed = true
