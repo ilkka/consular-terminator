@@ -9,6 +9,6 @@ module Consular
 
     VERSION = [
       Version::MAJOR, Version::MINOR, Version::PATCH, Version::BUILD
-    ].compatch.join('.')
+    ].compact.join('.')
   end
 end
