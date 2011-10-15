@@ -9,6 +9,9 @@ describe Consular::Terminator do
   it 'should treat linux as a valid system' do
     RbConfig::CONFIG.expects(:[]).with('host_os').returns('x86-linux')
     Consular::Terminator.expects(:`).with('which xdotool').returns('/usr/bin/xdotool')
+    stat = mock()
+    stat.expects(:executable?).returns(true)
+    File::Stat.expects(:new).returns(stat)
     Consular::Terminator.valid_system?.should == true
   end
 
@@ -20,12 +23,14 @@ describe Consular::Terminator do
   it 'should treat systems without "which" as invalid' do
     RbConfig::CONFIG.expects(:[]).with('host_os').returns('x86-linux')
     Consular::Terminator.expects(:`).with('which xdotool').returns('which: command not found')
+    File::Stat.expects(:new).throws('no such file')
     Consular::Terminator.valid_system?.should == false
   end
 
   it 'should treat systems without "xdotool" as invalid' do
     RbConfig::CONFIG.expects(:[]).with('host_os').returns('x86-linux')
     Consular::Terminator.expects(:`).with('which xdotool').returns('')
+    File::Stat.expects(:new).throws('no such file')
     Consular::Terminator.valid_system?.should == false
   end
 end
