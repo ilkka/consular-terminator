@@ -33,4 +33,18 @@ describe Consular::Terminator do
     File::Stat.expects(:new).throws('no such file')
     Consular::Terminator.valid_system?.should == false
   end
+
+  it 'should send ctrl+shift+i when creating new window' do
+    core = Consular::Terminator.new ''
+    core.expects(:active_terminator_window).returns(1)
+    core.expects(:xdotool).with("key --window 1 ctrl+shift+i")
+    core.open_window
+  end
+
+  it 'should send ctrl+shift+t when creating new tab' do
+    core = Consular::Terminator.new ''
+    core.expects(:active_terminator_window).returns(1)
+    core.expects(:xdotool).with("key --window 1 ctrl+shift+t")
+    core.open_tab
+  end
 end
