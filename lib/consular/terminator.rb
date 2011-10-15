@@ -13,8 +13,15 @@ module Consular
       #
       # @api public
       def valid_system?
-        ((RbConfig::CONFIG['host_os'] =~ /linux/) != nil) &&
-          !`which xdotool`.chomp.empty?
+        if (RbConfig::CONFIG['host_os'] =~ /linux/) != nil
+          if !(xdotool = `which xdotool`.chomp).empty?
+            begin
+              File::Stat.new(xdotool).executable?
+            rescue
+              false
+            end
+          end
+        end
       end
     end
   end
