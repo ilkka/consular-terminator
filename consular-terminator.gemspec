@@ -46,4 +46,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('spork')
   s.add_development_dependency('watchr')
   s.add_development_dependency('bundler')
+  s.add_development_dependency('mocha')
 end
