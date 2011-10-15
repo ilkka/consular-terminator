@@ -45,4 +45,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency('cucumber')
   s.add_development_dependency('spork')
   s.add_development_dependency('watchr')
+  s.add_development_dependency('bundler')
 end
