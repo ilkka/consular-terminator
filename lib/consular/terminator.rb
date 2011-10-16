@@ -97,7 +97,7 @@ module Consular
         if _first_run && !options[:default]
           open_window options.merge(window_options)
         else
-          key == 'default' ? active_window : open_tab(_options)
+          key == 'default' ? nil : open_tab(_options)
         end
 
         _first_run = false
