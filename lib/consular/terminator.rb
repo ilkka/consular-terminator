@@ -171,6 +171,9 @@ module Consular
     # @api public
     def open_tab(options = nil)
       send_keypress(active_terminator_window, "ctrl+shift+t")
+      # FIXME: horribly hacky but can't come up with any way
+      # to truly make sure tab has opened.
+      sleep 1
     end
 
     # Opens a new window and returns its
@@ -188,7 +191,12 @@ module Consular
     #
     # @api public
     def open_window(options = nil)
+      windowid_before = active_terminator_window
       send_keypress(active_terminator_window, "ctrl+shift+i")
+      # wait for the active window to change -> new window opened
+      while active_terminator_window == windowid_before
+        sleep 1
+      end
       return (@tabidx = 0)
     end
 
