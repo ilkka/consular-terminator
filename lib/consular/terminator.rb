@@ -198,7 +198,8 @@ module Consular
     #
     # @api private
     def send_keypress(winid, keys)
-      xdotool("key --window #{winid} #{keys}")
+      xdotool("windowfocus #{winid}")
+      xdotool("key #{keys}")
     end
 
     # Run command with active terminator
@@ -237,7 +238,8 @@ module Consular
     #
     # @api private
     def type_in_window(winid, text)
-      xdotool("type --window #{winid} \"#{text}\"")
+      xdotool("windowfocus #{winid}")
+      xdotool("type \"#{text}\"")
     end
 
     # Execute xdotool with the given args and return output
