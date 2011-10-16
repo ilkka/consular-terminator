@@ -230,7 +230,7 @@ module Consular
     #
     # @api private
     def all_terminator_windows
-      xdotool("search --all --onlyvisible --class terminator").split("\n")
+      xdotool("search --onlyvisible --class terminator").split("\n")
     end
 
     # Type text in window winid.
