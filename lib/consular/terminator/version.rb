@@ -1,5 +1,7 @@
+require 'consular'
+
 module Consular
-  class Terminator
+  class Terminator < Core
     module Version
       MAJOR = 0
       MINOR = 1

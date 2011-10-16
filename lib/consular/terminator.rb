@@ -9,7 +9,7 @@ module Consular
   # Instead we just count tabs and return tab indexes.
   #
   # Largely adapted from http://github.com/achiu/consular-osx
-  class Terminator
+  class Terminator < Core
 
     Consular.add_core self
 
@@ -38,7 +38,7 @@ module Consular
     #
     # @api public
     def initialize(path)
-      super()
+      super
       @tabidx = nil
     end
 
