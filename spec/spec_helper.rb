@@ -12,6 +12,16 @@ Spork.prefork do
 
   RSpec.configure do |config|
   end
+
+  require 'tempfile'
+
+  class EmptyTermfile < Tempfile
+    def initialize
+      super('consular')
+      write(%q(setup "echo 'setup'"))
+      rewind
+    end
+  end
 end
 
 Spork.each_run do
