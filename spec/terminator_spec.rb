@@ -38,7 +38,8 @@ describe Consular::Terminator do
     f = EmptyTermfile.new
     core = Consular::Terminator.new f.path
     core.expects(:active_terminator_window).returns(1)
-    core.expects(:xdotool).with("key --window 1 ctrl+shift+i")
+    core.expects(:xdotool).with("windowfocus 1")
+    core.expects(:xdotool).with("key ctrl+shift+i")
     core.open_window
   end
 
@@ -46,7 +47,8 @@ describe Consular::Terminator do
     f = EmptyTermfile.new
     core = Consular::Terminator.new f.path
     core.expects(:active_terminator_window).returns(1)
-    core.expects(:xdotool).with("key --window 1 ctrl+shift+t")
+    core.expects(:xdotool).with("windowfocus 1")
+    core.expects(:xdotool).with("key ctrl+shift+t")
     core.open_tab
   end
 end
