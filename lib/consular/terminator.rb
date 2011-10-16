@@ -214,7 +214,7 @@ module Consular
     #
     # @api private
     def run_in_active_terminator(cmd, options = {})
-      type_in_window(active_terminator_window, cmd)
+      type_in_window(active_terminator_window, "#{cmd}\n")
     end
 
     # Get active terminator window winid.
