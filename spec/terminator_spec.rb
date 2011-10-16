@@ -37,9 +37,11 @@ describe Consular::Terminator do
   it 'should send ctrl+shift+i when creating new window' do
     f = EmptyTermfile.new
     core = Consular::Terminator.new f.path
-    core.expects(:active_terminator_window).returns(1)
+    core.expects(:active_terminator_window).once.returns(1)
+    core.expects(:active_terminator_window).once.returns(1)
     core.expects(:xdotool).with("windowfocus 1")
     core.expects(:xdotool).with("key ctrl+shift+i")
+    core.expects(:active_terminator_window).once.returns(2)
     core.open_window
   end
 
