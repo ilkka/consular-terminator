@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    consular-terminator (0.1.0)
+    consular-terminator (0.1.1)
       consular
 
 GEM
